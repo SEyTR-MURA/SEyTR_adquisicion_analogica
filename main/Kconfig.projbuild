@@ -1,0 +1,49 @@
+# Las opciones declaradas en un Kconfig.projbuild aparecen en el nivel superior
+# del menu de configuracion, junto a las de ESP-IDF, y no dentro del submenu de
+# configuracion de componentes. Se convierten en macros CONFIG_... disponibles
+# desde el codigo.
+#
+# El pin no esta aqui: esta en main/pines.h, que es donde se declaran los pines
+# del proyecto.
+
+menu "SEyTR - Adquisicion analogica"
+
+    config SEYTR_PERIODO_MS
+        int "Periodo de muestreo, en milisegundos"
+        range 10 1000
+        default 100
+        help
+            Intervalo entre dos muestras. Con la espera hasta instante
+            absoluto es el periodo real; con la espera relativa, el real sale
+            mayor, porque se le suma lo que tarda el cuerpo del bucle.
+
+    config SEYTR_VENTANA_INICIAL
+        int "Ventana inicial de los filtros (N)"
+        range 2 64
+        default 8
+        help
+            Cuantas muestras promedia la media movil, o entre cuantas busca el
+            valor central la mediana, al arrancar. Las teclas + y - la doblan o
+            la reducen a la mitad sin recompilar, entre 2 y 64.
+
+    config SEYTR_CUERPO_LENTO_MS
+        int "Duracion del cuerpo de bucle lento, en milisegundos (tecla l)"
+        range 1 500
+        default 20
+        help
+            Trabajo que se anade a cada vuelta del bucle de muestreo cuando se
+            activa con la tecla l. Simula un procesado que tarda: con la
+            espera relativa, el periodo real crece en esta cantidad; con la
+            espera hasta instante absoluto, no. Tiene que ser menor que el
+            periodo de muestreo: si no, el programa no compila.
+
+    config SEYTR_MUESTRAS_DISPERSION
+        int "Muestras para medir la dispersion (tecla s)"
+        range 10 1000
+        default 100
+        help
+            Cuantas muestras seguidas toma la medida de dispersion: minimo,
+            maximo, media y desviacion tipica. Al periodo de partida, 100
+            muestras son 10 segundos.
+
+endmenu
