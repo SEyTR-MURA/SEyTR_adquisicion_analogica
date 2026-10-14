@@ -147,8 +147,10 @@ elegida, y la cuenta ya no responde al giro. Con la atenuación máxima pasa lo
 mismo cerca del final del recorrido, porque el rango medible termina por debajo
 de los 3,3 V de la alimentación. Gira despacio hasta que aparezca el tope y
 mide con el multímetro la tensión del cursor en ese punto: es el final del
-rango en tu placa. Con la atenuación ya al máximo, para medir más arriba hay
-que dividir la tensión antes de que entre.
+rango en tu placa. En la placa con la que se probó este ejemplo, con 3,28 V en
+el pin de 3V3, el tope llegó con el cursor entre 3,14 y 3,16 V. Con la
+atenuación ya al máximo, para medir más arriba hay que dividir la tensión
+antes de que entre.
 
 **Los milivoltios.** Con `c`, cada línea lleva también los milivoltios
 calibrados:
